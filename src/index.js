@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { retrieveCovidData } from '../src/data'
 
 async function component() {
-  let doThing = (name) => { return `hello ${name}` }  
+  let doThing = (data) => { return JSON.stringify(data, null, 2); }  
   
   const element = document.createElement('div');
   
