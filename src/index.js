@@ -1,13 +1,14 @@
 import Vue from 'vue'
+import { retrieveCovidData } from '../src/data'
 
-function component() {
+async function component() {
   let doThing = (name) => { return `hello ${name}` }  
   
   const element = document.createElement('div');
   
-    element.innerHTML = doThing("webpack")
+    element.innerHTML = doThing(await retrieveCovidData())
   
     return element;
 }
-  
-  document.body.appendChild(component());
+ 
+component().then(result => document.body.appendChild(result))
