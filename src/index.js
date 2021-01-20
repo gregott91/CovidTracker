@@ -1,9 +1,11 @@
 import Vue from 'vue'
 
 function component() {
-    const element = document.createElement('div');
+  let doThing = (name) => { return `hello ${name}` }  
   
-    element.innerHTML = "hello webpack"
+  const element = document.createElement('div');
+  
+    element.innerHTML = doThing("webpack")
   
     return element;
 }
