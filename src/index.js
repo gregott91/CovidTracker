@@ -1,5 +1,5 @@
 import {retrieveCovidData} from './data';
-import {startApp} from './component';
+import {startApp} from './root';
 
 async function start() {
   const data = await retrieveCovidData();

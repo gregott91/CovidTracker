@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/gregott91/CovidTracker#readme",
   "dependencies": {
-    "vue": "^2.6.12"
+    "js-datepicker": "^5.18.0",
+    "lightpick": "^1.6.2",
+    "litepicker": "^1.5.7",
+    "vue": "^2.6.12",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
