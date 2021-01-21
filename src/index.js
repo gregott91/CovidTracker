@@ -1,9 +1,10 @@
-import {retrieveCovidData} from './data';
+import {retrieveCovidData} from './api';
 import {startApp} from './root';
+import {transformData} from './data';
 
 async function start() {
   const data = await retrieveCovidData();
-  startApp(data);
+  startApp(transformData(data));
 }
 
 start();

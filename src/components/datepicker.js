@@ -1,20 +1,27 @@
 import Vue from 'vue';
 import datepicker from 'js-datepicker';
-import {ARROW_ACTION} from '../constants';
+import {ARROW_ACTION, EVENT_TYPE} from '../constants';
 
 export function initializeDatePickerComponent(observable) {
   Vue.component('vue-datepicker', {
     props: ['id', 'selecteddate'],
     mounted: function() {
-      datepicker(document.getElementById(this.id), {});
+      datepicker(document.getElementById(this.id), {
+        formatter: (input, date, instance) => {
+          input.value = date.toDateString();
+        },
+        onSelect: (instance, date) => {
+          observable.publish(EVENT_TYPE.DATE_CHANGED, date);
+        },
+      });
     },
     // define methods under the `methods` object
     methods: {
-      goBack: function(event) {
-        observable.publish(ARROW_ACTION.BACKWARD);
+      goBack: function() {
+        observable.publish(EVENT_TYPE.ARROW_CLICKED, ARROW_ACTION.BACKWARD);
       },
-      goForward: function(event) {
-        observable.publish(ARROW_ACTION.FORWARD);
+      goForward: function() {
+        observable.publish(EVENT_TYPE.ARROW_CLICKED, ARROW_ACTION.FORWARD);
       },
     },
     template: `

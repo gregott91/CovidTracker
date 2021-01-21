@@ -1,13 +1,21 @@
 export class Observable {
   constructor() {
-    this.subscribers = [];
+    this.subscribers = {};
   }
 
-  subscribe(callback) {
-    this.subscribers.push(callback);
+  subscribe(eventType, callback) {
+    this.validate(eventType);
+    this.subscribers[eventType].push(callback);
   }
 
-  publish(event) {
-    this.subscribers.forEach((subscriber) => subscriber(event));
+  publish(eventType, data) {
+    this.validate(eventType);
+    this.subscribers[eventType].forEach((subscriber) => subscriber(data));
+  }
+
+  validate(eventType) {
+    if (!this.subscribers[eventType]) {
+      this.subscribers[eventType] = [];
+    }
   }
 }
