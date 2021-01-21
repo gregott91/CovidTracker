@@ -10,6 +10,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
   },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    },
+  },
   plugins: [new MinifyPlugin()],
   module: {
     rules: [

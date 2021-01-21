@@ -5,6 +5,13 @@
     <title>Covid Data Dashboard</title>
   </head>
   <body>
+    <div id="app">
+      <data-point
+        v-bind:datatype="datatype"  
+        v-bind:datapoint="datapoint"
+        v-bind:key="datatype"
+      ></data-point>
+    </div>
     <script src="./dist/index.js"></script>
   </body>
 </html>

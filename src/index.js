@@ -1,14 +1,9 @@
-import Vue from 'vue'
-import { retrieveCovidData } from '../src/data'
+import {retrieveCovidData} from './data';
+import {startApp} from './component';
 
-async function component() {
-  let doThing = (data) => { return JSON.stringify(data, null, 2); }  
-  
-  const element = document.createElement('div');
-  
-    element.innerHTML = doThing(await retrieveCovidData())
-  
-    return element;
+async function start() {
+  const data = await retrieveCovidData();
+  startApp(data);
 }
- 
-component().then(result => document.body.appendChild(result))
+
+start();
