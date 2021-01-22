@@ -12,9 +12,9 @@ export function getIndexForDate(date, covidData) {
   return -1;
 }
 
-export function getDataTypes(covidData) {
+function getDataTypes(covidData) {
   const dataTypes = [];
-  const firstDataPoint = covidData.DailyData[0];
+  const firstDataPoint = covidData['DailyData'][0];
   for (const key in firstDataPoint) {
     if (key != 'DisplayDate' && key != 'Date') {
       dataTypes.push(key);
@@ -26,6 +26,7 @@ export function getDataTypes(covidData) {
 export function transformData(covidData) {
   const output = {
     DailyData: [],
+    DataTypes: getDataTypes(covidData),
     RetrievalTime: new Date(covidData['RetrievalTime']),
     RetrievalTimeDisplay: new Date(covidData['RetrievalTime']),
   };
@@ -35,15 +36,14 @@ export function transformData(covidData) {
     const dailyData = {
       Date: date,
       DisplayDate: formatDateForDisplay(date),
-      Deaths: {
-        NewCount: formatWithCommas(data['Deaths'].NewCount),
-        TotalCount: formatWithCommas(data['Deaths'].TotalCount),
-      },
-      Cases: {
-        NewCount: formatWithCommas(data['Cases'].NewCount),
-        TotalCount: formatWithCommas(data['Cases'].TotalCount),
-      },
     };
+
+    output.DataTypes.forEach((dataType) => {
+      dailyData[dataType] = {
+        NewCount: formatWithCommas(data[dataType].NewCount),
+        TotalCount: formatWithCommas(data[dataType].TotalCount),
+      };
+    });
 
     output.DailyData.push(dailyData);
   });
