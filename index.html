@@ -12,17 +12,23 @@
   </head>
   <body>
     <div id="app">
-      <vue-datepicker
-        id="datepicker"
-        v-bind:index="index"
-        v-bind:fulldata="fulldata"
-      ></vue-datepicker>
-      <vue-datapoint
-        v-bind:index="index"
-        v-bind:datatype="datatype"  
-        v-bind:fulldata="fulldata"
-        v-bind:key="datatype"
-      ></vue-datapoint>
+      <vue-datatypes
+        v-bind:selecteddatatype="selecteddatatype"
+        v-bind:datatypes="datatypes"
+      ></vue-datatypes>
+      <div class="panel-container">
+        <vue-datepicker
+          id="datepicker"
+          v-bind:index="index"
+          v-bind:fulldata="fulldata"
+        ></vue-datepicker>
+        <vue-datapoint
+          v-bind:index="index"
+          v-bind:selecteddatatype="selecteddatatype"  
+          v-bind:fulldata="fulldata"
+          v-bind:key="selecteddatatype"
+        ></vue-datapoint>
+      </div>
     </div>
     <script src="./dist/index.js"></script>
   </body>

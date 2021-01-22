@@ -18,9 +18,9 @@ export function initializeDatePickerComponent(observable) {
     },
     template: `
 <div>
-    <i class="fas fa-arrow-circle-left dateicon" v-on:click="goBack"></i>
-    <input :id="id" class="datepicker"/>
-    <i class="fas fa-arrow-circle-right dateicon" v-on:click="goForward"></i>
+    <i class="fas fa-arrow-circle-left date-icon" v-on:click="goBack"></i>
+    <input :id="id"/>
+    <i class="fas fa-arrow-circle-right date-icon" v-on:click="goForward"></i>
 </div>
 `,
     watch: {

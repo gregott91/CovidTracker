@@ -1,3 +1,17 @@
-i.dateicon {
+i.date-icon {
     cursor: pointer;
+}
+
+div.tab-bar {
+    float: left;
+    border-right: 1px solid black;
+    height: 100vh;
+}
+
+div.datatype-tab {
+    cursor: pointer;
+}
+
+div.panel-container {
+    display: inline-block;
 }
