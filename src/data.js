@@ -26,6 +26,7 @@ export function transformData(covidData) {
   const output = {
     DailyData: [],
     RetrievalTime: new Date(covidData['RetrievalTime']),
+    RetrievalTimeDisplay: new Date(covidData['RetrievalTime']),
   };
 
   covidData['DailyData'].forEach((data) => {

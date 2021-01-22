@@ -3,6 +3,7 @@ import {Observable} from './observable';
 import {initializeDatapointComponent} from './components/vue-datapoint';
 import {initializeDatePickerComponent} from './components/vue-datepicker';
 import {initializeDataTypesComponent} from './components/vue-datatypes';
+import {initializeFooterComponent} from './components/vue-footer';
 import {ARROW_ACTION, EVENT_TYPE} from './constants';
 import {getIndexForDate, getDataTypes} from './data';
 import {setValue} from './vue-helpers';
@@ -18,6 +19,7 @@ function defineComponents(observable) {
   initializeDatapointComponent();
   initializeDatePickerComponent(observable);
   initializeDataTypesComponent(observable);
+  initializeFooterComponent();
 }
 
 function defineApp(covidData, observable) {
@@ -25,6 +27,7 @@ function defineApp(covidData, observable) {
 
   const data = {
     index: 0,
+    retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: getDataTypes(covidData),
     selecteddatatype: dataTypes[0],
     fulldata: covidData['DailyData'],

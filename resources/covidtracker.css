@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 i.date-icon {
     cursor: pointer;
 }
@@ -8,10 +12,29 @@ div.tab-bar {
     height: 100vh;
 }
 
-div.datatype-tab {
-    cursor: pointer;
-}
-
 div.panel-container {
     display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+div.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    background: white;
+}
+
+div.tab-inner {
+    cursor: pointer;
+    padding: 5px 20px;
+    border-bottom: 1px solid black;
+}
+
+div.selected-tab {
+    color: white;
+    background: black;
 }

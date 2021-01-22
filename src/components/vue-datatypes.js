@@ -6,14 +6,15 @@ export function initializeDataTypesComponent(observable) {
     props: ['datatypes', 'selecteddatatype'],
     template: `
 <div class="tab-bar">
-    <div v-for="datatype in datatypes" class="datatype-tab" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
-    {{ datatype }}
+    <div v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
+        <div class="tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
+        <div class="tab-inner" v-else>{{ datatype }}</div>
     </div>
 </div>
 `,
     methods: {
       dataTypeClicked: function(event) {
-        const datatype = event.target.attributes['datatype'].value;
+        const datatype = event.target.parentElement.attributes['datatype'].value;
         observable.publish(EVENT_TYPE.DATATYPE_CHANGED, datatype);
       },
     },
