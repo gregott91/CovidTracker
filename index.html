@@ -14,12 +14,13 @@
     <div id="app">
       <vue-datepicker
         id="datepicker"
-        v-bind:selecteddate="datapoint.Date"
+        v-bind:index="index"
+        v-bind:fulldata="fulldata"
       ></vue-datepicker>
       <vue-datapoint
         v-bind:index="index"
         v-bind:datatype="datatype"  
-        v-bind:datapoint="datapoint"
+        v-bind:fulldata="fulldata"
         v-bind:key="datatype"
       ></vue-datapoint>
     </div>

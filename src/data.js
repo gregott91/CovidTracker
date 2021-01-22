@@ -1,9 +1,9 @@
+import {formatDateForDisplay} from './date-helpers';
+
 export function getIndexForDate(date, covidData) {
   for (let i = 0; i < covidData.DailyData.length; i++) {
     const thisDate = covidData.DailyData[i].Date;
-    console.log(thisDate.getTime());
-    console.log(date.getTime());
-    if (thisDate.getTime() === date.getTime()) {
+    if (areUtcDatesEqual(thisDate, date)) {
       return i;
     }
   }
@@ -18,8 +18,10 @@ export function transformData(covidData) {
   };
 
   covidData['DailyData'].forEach((data) => {
+    const date = new Date(data['Date']);
     const dailyData = {
-      Date: new Date(data['Date']),
+      Date: date,
+      DisplayDate: formatDateForDisplay(date),
       Deaths: {
         NewCount: data['Deaths'].NewCount,
         TotalCount: data['Deaths'].TotalCount,
@@ -34,4 +36,10 @@ export function transformData(covidData) {
   });
 
   return output;
+}
+
+function areUtcDatesEqual(date1, date2) {
+  return date1.getUTCFullYear() == date2.getUTCFullYear() &&
+  date1.getUTCMonth() == date2.getUTCMonth() &&
+  date1.getUTCDate() == date2.getUTCDate();
 }

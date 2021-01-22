@@ -1,21 +1,13 @@
 import Vue from 'vue';
-import datepicker from 'js-datepicker';
 import {ARROW_ACTION, EVENT_TYPE} from '../constants';
+import {initializeDatePicker, setDatePickerDate} from '../datepicker';
 
 export function initializeDatePickerComponent(observable) {
   Vue.component('vue-datepicker', {
-    props: ['id', 'selecteddate'],
+    props: ['id', 'index', 'fulldata'],
     mounted: function() {
-      datepicker(document.getElementById(this.id), {
-        formatter: (input, date, instance) => {
-          input.value = date.toDateString();
-        },
-        onSelect: (instance, date) => {
-          observable.publish(EVENT_TYPE.DATE_CHANGED, date);
-        },
-      });
+      this.datepicker = initializeDatePicker(this.id, this.fulldata[this.index].Date, observable);
     },
-    // define methods under the `methods` object
     methods: {
       goBack: function() {
         observable.publish(EVENT_TYPE.ARROW_CLICKED, ARROW_ACTION.BACKWARD);
@@ -31,5 +23,10 @@ export function initializeDatePickerComponent(observable) {
     <i class="fas fa-arrow-circle-right dateicon" v-on:click="goForward"></i>
 </div>
 `,
+    watch: {
+      index: function(val) {
+        setDatePickerDate(this.datepicker, this.fulldata[val].Date);
+      },
+    },
   });
 }

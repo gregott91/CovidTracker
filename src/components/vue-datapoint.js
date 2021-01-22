@@ -2,12 +2,11 @@ import Vue from 'vue';
 
 export function initializeDatapointComponent() {
   Vue.component('vue-datapoint', {
-    props: ['index', 'datapoint', 'datatype'],
+    props: ['index', 'fulldata', 'datatype'],
     template: `
     <div>
         <div>{{ datatype }}</div>
-        <div>{{ datapoint[index].Date }}</div>
-        <div>{{ datapoint[index][datatype] }}</div>
+        <div>{{ fulldata[index][datatype] }}</div>
     </div>
     `,
   });
