@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 i.date-icon {
@@ -16,6 +17,7 @@ div.panel-container {
     display: inline-block;
     margin-left: 20px;
     margin-top: 20px;
+    width: 500px;
 }
 
 div.footer {
@@ -37,4 +39,19 @@ div.tab-inner {
 div.selected-tab {
     color: white;
     background: black;
+}
+
+div.date-picker-container {
+    margin-bottom: 10px;
+}
+
+div.date-picker {
+    text-align: center;
+}
+
+input.date-picker-input {
+    font-family: inherit;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }

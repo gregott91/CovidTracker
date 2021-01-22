@@ -25,7 +25,7 @@ function defineComponents(observable) {
 function defineApp(covidData, observable) {
   const dataTypes = getDataTypes(covidData);
 
-  const data = {
+  const vueData = {
     index: 0,
     retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: getDataTypes(covidData),
@@ -35,16 +35,16 @@ function defineApp(covidData, observable) {
 
   new Vue({
     el: '#app',
-    data: data,
+    data: vueData,
   });
 
-  subscribeToEvents(observable, data);
+  subscribeToEvents(observable, vueData, covidData);
 }
 
-function subscribeToEvents(observable, data) {
+function subscribeToEvents(observable, vueData, covidData) {
   observable.subscribe(EVENT_TYPE.ARROW_CLICKED, (arrowAction) => {
     const changeIndex = (addition) => {
-      setDataIndex(data, data.index + addition);
+      setDataIndex(vueData, vueData.index + addition);
     };
 
     switch (arrowAction) {
@@ -54,15 +54,18 @@ function subscribeToEvents(observable, data) {
   });
 
   observable.subscribe(EVENT_TYPE.DATE_CHANGED, (date) => {
-    const index = getIndexForDate(date, covidData); // todo need to handle the -1 case
-    setDataIndex(data, index);
+    const index = getIndexForDate(date, covidData);
+
+    setDataIndex(vueData, index);
   });
 
   observable.subscribe(EVENT_TYPE.DATATYPE_CHANGED, (datatype) => {
-    setValue(data, 'selecteddatatype', datatype);
+    setValue(vueData, 'selecteddatatype', datatype);
   });
 }
 
 function setDataIndex(data, index) {
-  setValue(data, 'index', index);
+  if (index < data.fulldata.length && index >= 0) {
+    setValue(data, 'index', index);
+  }
 }

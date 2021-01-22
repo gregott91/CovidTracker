@@ -1,4 +1,5 @@
 import {formatDateForDisplay} from './date-helpers';
+import {formatWithCommas} from './number-helpers';
 
 export function getIndexForDate(date, covidData) {
   for (let i = 0; i < covidData.DailyData.length; i++) {
@@ -35,12 +36,12 @@ export function transformData(covidData) {
       Date: date,
       DisplayDate: formatDateForDisplay(date),
       Deaths: {
-        NewCount: data['Deaths'].NewCount,
-        TotalCount: data['Deaths'].TotalCount,
+        NewCount: formatWithCommas(data['Deaths'].NewCount),
+        TotalCount: formatWithCommas(data['Deaths'].TotalCount),
       },
       Cases: {
-        NewCount: data['Cases'].NewCount,
-        TotalCount: data['Cases'].TotalCount,
+        NewCount: formatWithCommas(data['Cases'].NewCount),
+        TotalCount: formatWithCommas(data['Cases'].TotalCount),
       },
     };
 

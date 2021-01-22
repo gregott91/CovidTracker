@@ -5,7 +5,7 @@ export function initializeDatapointComponent() {
     props: ['index', 'fulldata', 'selecteddatatype'],
     template: `
     <div>
-        <div>{{ selecteddatatype }}</div>
+        <div>{{ selecteddatatype }} for {{ fulldata[index].DisplayDate }}</div>
         <div>New: {{ fulldata[index][selecteddatatype].NewCount }}</div>
         <div>Total: {{ fulldata[index][selecteddatatype].TotalCount }}</div>
     </div>

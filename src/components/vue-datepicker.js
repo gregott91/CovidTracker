@@ -17,10 +17,12 @@ export function initializeDatePickerComponent(observable) {
       },
     },
     template: `
-<div>
+<div class="date-picker-container">
+  <div class="date-picker">
     <i class="fas fa-arrow-circle-left date-icon" v-on:click="goBack"></i>
-    <input :id="id"/>
+    <input :id="id" class="date-picker-input"/>
     <i class="fas fa-arrow-circle-right date-icon" v-on:click="goForward"></i>
+  </div>
 </div>
 `,
     watch: {
