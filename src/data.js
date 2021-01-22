@@ -11,6 +11,17 @@ export function getIndexForDate(date, covidData) {
   return -1;
 }
 
+export function getDataTypes(covidData) {
+  const dataTypes = [];
+  const firstDataPoint = covidData.DailyData[0];
+  for (const key in firstDataPoint) {
+    if (key != 'DisplayDate' && key != 'Date') {
+      dataTypes.push(key);
+    }
+  }
+  return dataTypes;
+}
+
 export function transformData(covidData) {
   const output = {
     DailyData: [],

@@ -4,7 +4,7 @@ import {initializeDatapointComponent} from './components/vue-datapoint';
 import {initializeDatePickerComponent} from './components/vue-datepicker';
 import {initializeDataTypesComponent} from './components/vue-datatypes';
 import {ARROW_ACTION, EVENT_TYPE} from './constants';
-import {getIndexForDate} from './data';
+import {getIndexForDate, getDataTypes} from './data';
 import {setValue} from './vue-helpers';
 
 export function startApp(covidData) {
@@ -21,10 +21,12 @@ function defineComponents(observable) {
 }
 
 function defineApp(covidData, observable) {
+  const dataTypes = getDataTypes(covidData);
+
   const data = {
     index: 0,
-    datatypes: ['Deaths', 'Cases'], // todo detect this programmatically
-    selecteddatatype: 'Deaths',
+    datatypes: getDataTypes(covidData),
+    selecteddatatype: dataTypes[0],
     fulldata: covidData['DailyData'],
   };
 
