@@ -44,6 +44,10 @@ div.tab-inner {
     border-bottom: 0.1rem solid black;
 }
 
+div.tab-inner:hover {
+    background-color: lightgray;
+}
+
 div.selected-tab {
     color: white;
     background: black;
