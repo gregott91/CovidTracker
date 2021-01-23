@@ -42,11 +42,12 @@ function getTransformPredictionFunction(dataTypes, countTypes, dailyData) {
   const groupedAverages = calculateGroupedDataAverages(dataTypes, countTypes, dailyData);
   return (index, data, dataType, countType) => {
     const tomorrowIndex = index - 1;
-    const groupIndex = tomorrowIndex % rollAmount;
-    const groupedAverage = groupedAverages[dataType][countType][groupIndex];
-
+    const tomorrowGroupIndex = (rollAmount + tomorrowIndex) % rollAmount;
+    const todayGroupIndex = index % rollAmount;
+    const tomorrowGroupedAverage = groupedAverages[dataType][countType][tomorrowGroupIndex];
+    const todayGroupedAverage = groupedAverages[dataType][countType][todayGroupIndex];
     const output = {
-      Value: formatWithCommas(groupedAverage * data),
+      Value: formatWithCommas(tomorrowGroupedAverage * (data / todayGroupedAverage)),
       HasActual: false,
     };
 
