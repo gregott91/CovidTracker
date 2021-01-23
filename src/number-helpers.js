@@ -3,5 +3,12 @@ export function formatWithCommas(number) {
 }
 
 export function formatPercent(number) {
-  return parseFloat(number).toFixed(2)+'%';
+  const value = parseFloat(number * 100.0).toFixed(2)+'%';
+  let modifier = '+';
+
+  if (number < 0) {
+    modifier = '';
+  }
+
+  return `${modifier}${value}`;
 }

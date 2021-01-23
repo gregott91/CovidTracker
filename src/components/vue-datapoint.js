@@ -6,11 +6,15 @@ export function initializeDatapointComponent() {
     template: `
     <div class="datapoint-container">
         <div class="datapoint-header">{{ selecteddatatype }} for {{ fulldata[index].DisplayDate }}</div>
-        <div class="datapoint-primarydata">Total: {{ fulldata[index].Raw[selecteddatatype].TotalCount }}</div>
-        <div class="datapoint-primarydata">New: {{ fulldata[index].Raw[selecteddatatype].NewCount }}</div>
+        <div class="datapoint-primarydata">Total: {{ fulldata[index].Raw[selecteddatatype].TotalCount.Value }}</div>
+        <div class="datapoint-primarydata">New: {{ fulldata[index].Raw[selecteddatatype].NewCount.Value }}</div>
+        <div class="datapoint-secondaryData">Change from last week: {{ fulldata[index].Raw[selecteddatatype].NewCount.PercentChange }}</div>
+        <div class="datapoint-secondaryData">Value last week: {{ fulldata[index].Raw[selecteddatatype].NewCount.PreviousValue }}</div>
         <div class="datapoint-primarydata">Rolling average (7-day): {{ fulldata[index].Rolling[selecteddatatype].NewCount.Value }}</div>
-        <div class="datapoint-primarydata">Rolling average change from last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PercentChange }}</div>
-        <div class="datapoint-secondaryData">Rolling average last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PreviousValue }}</div>
+        <div class="datapoint-secondaryData">Change from last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PercentChange }}</div>
+        <div class="datapoint-secondaryData">Value last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PreviousValue }}</div>
+        <div class="datapoint-primarydata">Predicted tomorrow: {{ fulldata[index].Predicted[selecteddatatype].NewCount.Value }}</div>
+        <div v-if="fulldata[index].Predicted[selecteddatatype].NewCount.HasActual" class="datapoint-secondaryData">Actual: {{ fulldata[index].Predicted[selecteddatatype].NewCount.Actual }}</div>
     </div>
     `,
   });

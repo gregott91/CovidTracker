@@ -1,7 +1,7 @@
 import {formatDateForDisplay} from './date-helpers';
 import {formatWithCommas, formatPercent} from './number-helpers';
 import {areUtcDatesEqual} from './date-helpers';
-import {getRollingAverage} from './math';
+import {getRollingAverage, getGroupedDataAverage} from './math';
 
 const rollAmount = 7;
 
@@ -28,41 +28,67 @@ export function transformData(covidData) {
     RetrievalTimeDisplay: new Date(covidData['RetrievalTime']),
   };
 
-  const rollingAverages = calculateRollingAverages(dataTypes, countTypes, dailyData);
-
   let transformedData = getMetadata(dailyData);
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction());
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(rollingAverages));
+  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction(dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(dataTypes, countTypes, dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Predicted', getTransformPredictionFunction(dataTypes, countTypes, dailyData));
 
   output.DailyData = transformedData;
 
   return output;
 }
 
-function getTransformRawPointFunction() {
+function getTransformPredictionFunction(dataTypes, countTypes, dailyData) {
+  const groupedAverages = calculateGroupedDataAverages(dataTypes, countTypes, dailyData);
   return (index, data, dataType, countType) => {
-    return formatWithCommas(data);
+    const tomorrowIndex = index - 1;
+    const groupIndex = tomorrowIndex % rollAmount;
+    const groupedAverage = groupedAverages[dataType][countType][groupIndex];
+
+    const output = {
+      Value: formatWithCommas(groupedAverage * data),
+      HasActual: false,
+    };
+
+    if (tomorrowIndex >= 0) {
+      output.HasActual = true;
+      output.Actual = formatWithCommas(dailyData[tomorrowIndex][dataType][countType]);
+    }
+
+    return output;
   };
 }
 
-function getTransformRollingFunction(rollingAverages) {
+function getTransformRawPointFunction(dailyData) {
   return (index, _, dataType, countType) => {
-    const rolled = rollingAverages[dataType][countType][index];
-    const data = {
-      Value: formatWithCommas(rolled),
-    };
-
-    const previousIndex = index + rollAmount;
-
-    data.HasPrevious = !(previousIndex >= rollingAverages[dataType][countType].length);
-    if (data.HasPrevious) {
-      const previousRolled = rollingAverages[dataType][countType][previousIndex];
-      data.PercentChange = formatPercent((rolled - previousRolled) / previousRolled);
-      data.PreviousValue = formatWithCommas(previousRolled);
-    }
-
-    return data;
+    return defaultTransformData(dailyData, dataType, countType, index);
   };
+}
+
+function getTransformRollingFunction(dataTypes, countTypes, dailyData) {
+  const rollingAverages = calculateRollingAverages(dataTypes, countTypes, dailyData);
+
+  return (index, _, dataType, countType) => {
+    return defaultTransformData(rollingAverages, dataType, countType, index);
+  };
+}
+
+function defaultTransformData(dataArray, dataType, countType, index) {
+  const dataPoint = dataArray[index][dataType][countType];
+  const data = {
+    Value: formatWithCommas(dataPoint),
+  };
+
+  const previousIndex = index + rollAmount;
+
+  data.HasPrevious = !(previousIndex >= dataArray.length);
+  if (data.HasPrevious) {
+    const previousDataPoint = dataArray[previousIndex][dataType][countType];
+    data.PercentChange = formatPercent((dataPoint - previousDataPoint) / previousDataPoint);
+    data.PreviousValue = formatWithCommas(previousDataPoint);
+  }
+
+  return data;
 }
 
 function transformAndMergeData(
@@ -115,15 +141,42 @@ function getMetadata(dailyData) {
 }
 
 function calculateRollingAverages(dataTypes, countTypes, data) {
-  const rollingAverages = {};
+  let rollingAverages = data.map((x) => {
+    return {};
+  });
 
   dataTypes.forEach((dataType) => {
-    rollingAverages[dataType] = {};
     countTypes.forEach((countType) => {
       const roll = getRollingAverage(rollAmount, data.map((x) => x[dataType][countType]));
-      rollingAverages[dataType][countType] = roll;
+
+      rollingAverages = rollingAverages.map((dataPoint, index) => {
+        const rollPoint = roll[index];
+
+        if (!dataPoint[dataType]) {
+          dataPoint[dataType] = {};
+        }
+
+        dataPoint[dataType][countType] = rollPoint;
+
+        return dataPoint;
+      });
     });
   });
 
   return rollingAverages;
+}
+
+
+function calculateGroupedDataAverages(dataTypes, countTypes, data) {
+  const predictions = {};
+
+  dataTypes.forEach((dataType) => {
+    predictions[dataType] = {};
+    countTypes.forEach((countType) => {
+      const groupedAverages = getGroupedDataAverage(rollAmount, data.map((x) => x[dataType][countType]));
+      predictions[dataType][countType] = groupedAverages;
+    });
+  });
+
+  return predictions;
 }
