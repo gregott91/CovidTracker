@@ -7,8 +7,9 @@ export function initializeDatapointComponent() {
     <div>
         <div>{{ selecteddatatype }} for {{ fulldata[index].DisplayDate }}</div>
         <div>New: {{ fulldata[index].Raw[selecteddatatype].NewCount }}</div>
+        <div>New Rolling Average: {{ fulldata[index].Rolling[selecteddatatype].NewCount }}</div>
         <div>Total: {{ fulldata[index].Raw[selecteddatatype].TotalCount }}</div>
-        <div>Rolling: {{ fulldata[index].Rolling[selecteddatatype] }}</div>
+        <div>Total Rolling Average: {{ fulldata[index].Rolling[selecteddatatype].TotalCount }}</div>
     </div>
     `,
   });

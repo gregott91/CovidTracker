@@ -30,8 +30,6 @@ export function transformData(covidData) {
   transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction());
   transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(dataTypes, countTypes, dailyData));
 
-  console.error(transformedData);
-
   output.DailyData = transformedData;
 
   return output;
@@ -45,8 +43,8 @@ function getTransformRawPointFunction() {
 
 function getTransformRollingFunction(dataTypes, countTypes, dailyData) {
   const rollingAverages = calculateRollingAverages(dataTypes, countTypes, dailyData);
-  return (index, data, dataType, countType) => {
-    return rollingAverages[dataType][countType][index];
+  return (index, _, dataType, countType) => {
+    return formatWithCommas(rollingAverages[dataType][countType][index]);
   };
 }
 
