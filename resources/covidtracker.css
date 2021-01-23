@@ -63,3 +63,17 @@ input.date-picker-input {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
+
+div.datapoint-container {
+    margin-top: 1em;
+}
+
+div.datapoint-header {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+div.datapoint-secondaryData {
+    margin-left: 2em;
+}

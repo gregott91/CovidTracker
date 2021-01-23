@@ -1,7 +1,9 @@
 import {formatDateForDisplay} from './date-helpers';
-import {formatWithCommas} from './number-helpers';
+import {formatWithCommas, formatPercent} from './number-helpers';
 import {areUtcDatesEqual} from './date-helpers';
 import {getRollingAverage} from './math';
+
+const rollAmount = 7;
 
 export function getIndexForDate(date, covidData) {
   for (let i = 0; i < covidData.DailyData.length; i++) {
@@ -26,9 +28,11 @@ export function transformData(covidData) {
     RetrievalTimeDisplay: new Date(covidData['RetrievalTime']),
   };
 
+  const rollingAverages = calculateRollingAverages(dataTypes, countTypes, dailyData);
+
   let transformedData = getMetadata(dailyData);
   transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction());
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(dataTypes, countTypes, dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(rollingAverages));
 
   output.DailyData = transformedData;
 
@@ -41,10 +45,23 @@ function getTransformRawPointFunction() {
   };
 }
 
-function getTransformRollingFunction(dataTypes, countTypes, dailyData) {
-  const rollingAverages = calculateRollingAverages(dataTypes, countTypes, dailyData);
+function getTransformRollingFunction(rollingAverages) {
   return (index, _, dataType, countType) => {
-    return formatWithCommas(rollingAverages[dataType][countType][index]);
+    const rolled = rollingAverages[dataType][countType][index];
+    const data = {
+      Value: formatWithCommas(rolled),
+    };
+
+    const previousIndex = index + rollAmount;
+
+    data.HasPrevious = !(previousIndex >= rollingAverages[dataType][countType].length);
+    if (data.HasPrevious) {
+      const previousRolled = rollingAverages[dataType][countType][previousIndex];
+      data.PercentChange = formatPercent((rolled - previousRolled) / previousRolled);
+      data.PreviousValue = formatWithCommas(previousRolled);
+    }
+
+    return data;
   };
 }
 
@@ -99,7 +116,6 @@ function getMetadata(dailyData) {
 
 function calculateRollingAverages(dataTypes, countTypes, data) {
   const rollingAverages = {};
-  const rollAmount = 7;
 
   dataTypes.forEach((dataType) => {
     rollingAverages[dataType] = {};

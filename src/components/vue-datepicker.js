@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {ARROW_ACTION, EVENT_TYPE} from '../constants';
-import {initializeDatePicker, setDatePickerDate} from '../datepicker';
+import {initializeDatePicker, setDatePickerDate} from '../date-picker';
 
 export function initializeDatePickerComponent(observable) {
   Vue.component('vue-datepicker', {
