@@ -6,7 +6,7 @@ export function initializeDatePickerComponent(observable) {
   Vue.component('vue-datepicker', {
     props: ['id', 'index', 'fulldata'],
     mounted: function() {
-      this.datepicker = initializeDatePicker(this.id, this.fulldata[this.index].Date, observable);
+      this.datepicker = initializeDatePicker(this.id, this.fulldata[0].Date, this.fulldata[this.fulldata.length - 1].Date, observable);
     },
     methods: {
       goBack: function() {

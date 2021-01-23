@@ -7,3 +7,7 @@ export function areUtcDatesEqual(date1, date2) {
   date1.getUTCMonth() == date2.getUTCMonth() &&
   date1.getUTCDate() == date2.getUTCDate();
 }
+
+export function parseAsUTCDate(date) {
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
