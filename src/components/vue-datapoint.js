@@ -6,8 +6,9 @@ export function initializeDatapointComponent() {
     template: `
     <div>
         <div>{{ selecteddatatype }} for {{ fulldata[index].DisplayDate }}</div>
-        <div>New: {{ fulldata[index][selecteddatatype].NewCount }}</div>
-        <div>Total: {{ fulldata[index][selecteddatatype].TotalCount }}</div>
+        <div>New: {{ fulldata[index].Raw[selecteddatatype].NewCount }}</div>
+        <div>Total: {{ fulldata[index].Raw[selecteddatatype].TotalCount }}</div>
+        <div>Rolling: {{ fulldata[index].Rolling[selecteddatatype] }}</div>
     </div>
     `,
   });
