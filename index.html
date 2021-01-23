@@ -11,11 +11,12 @@
   </head>
   <body>
     <div id="app">
+      <div class="main-content">
       <vue-datatypes
         v-bind:selecteddatatype="selecteddatatype"
         v-bind:datatypes="datatypes"
       ></vue-datatypes>
-      <div class="panel-container">
+      <div class="content-container">
         <vue-datepicker
           id="datepicker"
           v-bind:index="index"
@@ -28,6 +29,7 @@
           v-bind:key="selecteddatatype"
         ></vue-datapoint>
       </div>
+    </div>
       <vue-footer
           v-bind:retrievaltime="retrievaltime"
       ></vue-footer>

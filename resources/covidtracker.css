@@ -1,5 +1,11 @@
+html {
+    font-size: 62.5%;
+  }
+  
+
 body {
     margin: 0;
+    font-size: 1.6rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -8,16 +14,18 @@ i.date-icon {
 }
 
 div.tab-bar {
-    float: left;
-    border-right: 1px solid black;
+    border-right: 0.1rem solid black;
+}
+
+div.main-content {
+    display: flex;
     height: 100vh;
 }
 
-div.panel-container {
-    display: inline-block;
-    margin-left: 20px;
-    margin-top: 20px;
-    width: 500px;
+div.content-container {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    flex-grow: 1;
 }
 
 div.footer {
@@ -26,14 +34,14 @@ div.footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    border-top: 1px solid black;
+    border-top: 0.1rem solid black;
     background: white;
 }
 
 div.tab-inner {
     cursor: pointer;
-    padding: 5px 20px;
-    border-bottom: 1px solid black;
+    padding: 0.5rem 2rem;
+    border-bottom: 0.1rem solid black;
 }
 
 div.selected-tab {
@@ -42,7 +50,7 @@ div.selected-tab {
 }
 
 div.date-picker-container {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 }
 
 div.date-picker {
@@ -52,6 +60,6 @@ div.date-picker {
 input.date-picker-input {
     font-family: inherit;
     text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
