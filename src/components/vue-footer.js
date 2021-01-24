@@ -4,9 +4,9 @@ export function initializeFooterComponent() {
   Vue.component('vue-footer', {
     props: ['retrievaltime'],
     template: `
-    <div class="footer">
-        Data last retrieved on: {{ retrievaltime }}
-    </div>
+<div class="footer">
+  <footer class="page-footer grey darken-1">Data last retrieved on: {{ retrievaltime }}</footer>
+</div>
     `,
   });
 }

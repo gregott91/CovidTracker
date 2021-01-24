@@ -34,8 +34,6 @@ div.footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    border-top: 0.1rem solid lightgray;
-    background: white;
     z-index: 1000;
 }
 
@@ -92,4 +90,8 @@ ul.sidenav-relative {
 
 .qs-datepicker-container{
     font-size: 1.5rem;
+}
+
+.page-footer {
+    padding-top: 0px;
 }
