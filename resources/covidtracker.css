@@ -74,10 +74,8 @@ div.datapoint-container {
     margin-top: 1em;
 }
 
-div.datapoint-header {
+h4.datapoint-header {
     text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
 }
 
 div.datapoint-secondaryData {
