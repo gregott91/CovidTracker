@@ -67,6 +67,7 @@ input.date-picker-input {
     text-align: center;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    width: 20rem;
 }
 
 div.datapoint-container {
