@@ -87,6 +87,7 @@ div.graph-canvas-container {
 ul.sidenav-relative {
     position: relative;
     transform: translateX(0%);
+    height: 100vh;
 }
 
 .qs-datepicker-container{

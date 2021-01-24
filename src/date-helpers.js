@@ -11,3 +11,22 @@ export function areUtcDatesEqual(date1, date2) {
 export function parseAsUTCDate(date) {
   return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
 }
+
+export function formatDateTimeForDisplay(date) {
+  const locale = getLocale();
+  const dateString = date.toLocaleDateString(locale, {
+    dateStyle: 'short',
+  });
+  const timeString = date.toLocaleTimeString(locale, {
+    timeStyle: 'medium',
+  });
+  return `${dateString} ${timeString}`;
+}
+
+function getLocale() {
+  try {
+    return navigator.languages[0];
+  } catch {
+    return 'en-US';
+  }
+}

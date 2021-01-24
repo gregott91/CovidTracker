@@ -1,4 +1,4 @@
-import {formatDateForDisplay, areUtcDatesEqual} from './date-helpers';
+import {formatDateForDisplay, areUtcDatesEqual, formatDateTimeForDisplay} from './date-helpers';
 import {formatWithCommas, formatPercent, roundNumber} from './number-helpers';
 import {getRollingAverage, getGroupedDataAverage} from './math';
 
@@ -23,8 +23,7 @@ export function transformData(covidData) {
   const output = {
     DailyData: [],
     DataTypes: dataTypes,
-    RetrievalTime: new Date(covidData['RetrievalTime']),
-    RetrievalTimeDisplay: new Date(covidData['RetrievalTime']),
+    RetrievalTimeDisplay: formatDateTimeForDisplay(new Date(covidData['RetrievalTime'])),
   };
 
   let transformedData = getMetadata(dailyData);
