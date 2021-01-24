@@ -46,6 +46,7 @@ div.tab-inner {
 
 div.tab-inner:hover {
     background-color: lightgray;
+    color: black;
 }
 
 div.selected-tab {
