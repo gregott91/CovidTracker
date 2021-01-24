@@ -12,3 +12,7 @@ export function formatPercent(number) {
 
   return `${modifier}${value}`;
 }
+
+export function roundNumber(number, rounding) {
+  return +parseFloat(number).toFixed(rounding);
+}

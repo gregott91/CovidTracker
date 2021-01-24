@@ -14,7 +14,7 @@ i.date-icon {
 }
 
 div.tab-bar {
-    border-right: 0.1rem solid black;
+    border-right: 0.1rem solid rgba(0,0,0,0.14);
 }
 
 div.main-content {
@@ -34,7 +34,7 @@ div.footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    border-top: 0.1rem solid black;
+    border-top: 0.1rem solid lightgray;
     background: white;
     z-index: 1000;
 }
@@ -42,7 +42,6 @@ div.footer {
 div.tab-inner {
     cursor: pointer;
     padding: 0.5rem 2rem;
-    border-bottom: 0.1rem solid darkgray;
     width: 100%;
 }
 
@@ -51,17 +50,13 @@ div.unselected-tab:hover {
     color: black;
 }
 
-div.selected-tab {
-    color: white;
-    background: black;
-}
-
 div.date-picker-container {
     margin-bottom: 0.5rem;
 }
 
 div.date-picker {
     text-align: center;
+    user-select: none;
 }
 
 input.date-picker-input {
@@ -70,6 +65,9 @@ input.date-picker-input {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     width: 20rem;
+    font-size: 2rem;
+    user-select: none;
+    cursor: pointer;
 }
 
 div.datapoint-container {
@@ -89,4 +87,8 @@ div.graph-canvas-container {
 ul.sidenav-relative {
     position: relative;
     transform: translateX(0%);
+}
+
+.qs-datepicker-container{
+    font-size: 1.5rem;
 }

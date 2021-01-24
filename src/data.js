@@ -1,6 +1,5 @@
-import {formatDateForDisplay} from './date-helpers';
-import {formatWithCommas, formatPercent} from './number-helpers';
-import {areUtcDatesEqual} from './date-helpers';
+import {formatDateForDisplay, areUtcDatesEqual} from './date-helpers';
+import {formatWithCommas, formatPercent, roundNumber} from './number-helpers';
 import {getRollingAverage, getGroupedDataAverage} from './math';
 
 const rollAmount = 7;
@@ -80,7 +79,7 @@ function defaultTransformData(dataArray, dataType, countType, index) {
   const dataPoint = dataArray[index][dataType][countType];
   const data = {
     Value: formatWithCommas(dataPoint),
-    RawValue: dataPoint,
+    RawValue: roundNumber(dataPoint, 2),
   };
 
   const previousIndex = index + daysInWeek;
