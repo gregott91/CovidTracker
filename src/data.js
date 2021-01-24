@@ -40,10 +40,11 @@ export function transformData(covidData) {
 
 function getTransformPredictionFunction(dataTypes, countTypes, dailyData) {
   const groupedAverages = calculateGroupedDataAverages(dataTypes, countTypes, dailyData);
+  const daysInWeek = 7;
   return (index, data, dataType, countType) => {
     const tomorrowIndex = index - 1;
-    const tomorrowGroupIndex = (rollAmount + tomorrowIndex) % rollAmount;
-    const todayGroupIndex = index % rollAmount;
+    const tomorrowGroupIndex = (daysInWeek + tomorrowIndex) % daysInWeek;
+    const todayGroupIndex = index % daysInWeek;
     const tomorrowGroupedAverage = groupedAverages[dataType][countType][tomorrowGroupIndex];
     const todayGroupedAverage = groupedAverages[dataType][countType][todayGroupIndex];
     const output = {
@@ -75,12 +76,14 @@ function getTransformRollingFunction(dataTypes, countTypes, dailyData) {
 }
 
 function defaultTransformData(dataArray, dataType, countType, index) {
+  const daysInWeek = 7;
   const dataPoint = dataArray[index][dataType][countType];
   const data = {
     Value: formatWithCommas(dataPoint),
+    RawValue: dataPoint,
   };
 
-  const previousIndex = index + rollAmount;
+  const previousIndex = index + daysInWeek;
 
   data.HasPrevious = !(previousIndex >= dataArray.length);
   if (data.HasPrevious) {
@@ -170,11 +173,11 @@ function calculateRollingAverages(dataTypes, countTypes, data) {
 
 function calculateGroupedDataAverages(dataTypes, countTypes, data) {
   const predictions = {};
-
+  const daysInWeek = 7;
   dataTypes.forEach((dataType) => {
     predictions[dataType] = {};
     countTypes.forEach((countType) => {
-      const groupedAverages = getGroupedDataAverage(rollAmount, data.map((x) => x[dataType][countType]));
+      const groupedAverages = getGroupedDataAverage(daysInWeek, data.map((x) => x[dataType][countType]));
       predictions[dataType][countType] = groupedAverages;
     });
   });

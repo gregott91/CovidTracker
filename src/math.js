@@ -15,12 +15,12 @@ function rollDataPoint(index, dataArray, rollAmount) {
     startIndex = 0;
   }
 
-  if (endIndex > dataArray.length) {
+  if (endIndex >= dataArray.length) {
     startIndex = startIndex - (endIndex - dataArray.length);
-    endIndex = dataArray.length;
+    endIndex = dataArray.length-1;
   }
 
-  for (let i = startIndex; i < endIndex; i++) {
+  for (let i = startIndex; i <= endIndex; i++) {
     if (i < 0) {
       continue;
     }
