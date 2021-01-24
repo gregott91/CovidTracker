@@ -36,15 +36,17 @@ div.footer {
     text-align: center;
     border-top: 0.1rem solid black;
     background: white;
+    z-index: 1000;
 }
 
 div.tab-inner {
     cursor: pointer;
     padding: 0.5rem 2rem;
-    border-bottom: 0.1rem solid black;
+    border-bottom: 0.1rem solid darkgray;
+    width: 100%;
 }
 
-div.tab-inner:hover {
+div.unselected-tab:hover {
     background-color: lightgray;
     color: black;
 }
@@ -74,10 +76,6 @@ div.datapoint-container {
     margin-top: 1em;
 }
 
-h4.datapoint-header {
-    text-align: center;
-}
-
 div.datapoint-secondaryData {
     margin-left: 2em;
 }
@@ -86,5 +84,9 @@ div.graph-canvas-container {
     height: 10rem;
     width: 100rem;
     position: relative;
-    margin: 0 auto;
+}
+
+ul.sidenav-relative {
+    position: relative;
+    transform: translateX(0%);
 }

@@ -6,10 +6,12 @@ export function initializeDataTypesComponent(observable) {
     props: ['datatypes', 'selecteddatatype'],
     template: `
 <div class="tab-bar">
-    <div v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
-        <div class="tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
-        <div class="tab-inner" v-else>{{ datatype }}</div>
-    </div>
+  <ul class="sidenav sidenav-relative">
+    <li v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype" class="bold">
+        <div class="waves-effect waves-teal tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
+        <div class="waves-effect waves-teal tab-inner unselected-tab" v-else>{{ datatype }}</div>
+    </li>
+  </ul>
 </div>
 `,
     methods: {
