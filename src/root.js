@@ -1,9 +1,6 @@
 import Vue from 'vue';
 import {Observable} from './observable';
-import {initializeDatapointComponent} from './components/vue-datapoint';
-import {initializeDatePickerComponent} from './components/vue-datepicker';
-import {initializeDataTypesComponent} from './components/vue-datatypes';
-import {initializeFooterComponent} from './components/vue-footer';
+import {initializeComponents} from './components/components';
 import {ARROW_ACTION, EVENT_TYPE} from './constants';
 import {getIndexForDate} from './data';
 import {setValue} from './vue-helpers';
@@ -11,15 +8,8 @@ import {setValue} from './vue-helpers';
 export function startApp(covidData) {
   const observable = new Observable();
 
-  defineComponents(observable);
+  initializeComponents(observable);
   defineApp(covidData, observable);
-}
-
-function defineComponents(observable) {
-  initializeDatapointComponent();
-  initializeDatePickerComponent(observable);
-  initializeDataTypesComponent(observable);
-  initializeFooterComponent();
 }
 
 function defineApp(covidData, observable) {
