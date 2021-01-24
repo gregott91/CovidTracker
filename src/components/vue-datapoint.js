@@ -13,7 +13,7 @@ export function initializeDatapointComponent() {
         <div class="datapoint-primarydata">Rolling average (7-day): {{ fulldata[index].Rolling[selecteddatatype].NewCount.Value }}</div>
         <div class="datapoint-secondaryData">Change from last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PercentChange }}</div>
         <div class="datapoint-secondaryData">Value last week: {{ fulldata[index].Rolling[selecteddatatype].NewCount.PreviousValue }}</div>
-        <div class="datapoint-primarydata">Expected tomorrow: {{ fulldata[index].Predicted[selecteddatatype].NewCount.Value }}</div>
+        <div class="datapoint-primarydata">Expected next day: {{ fulldata[index].Predicted[selecteddatatype].NewCount.Value }}</div>
         <div v-if="fulldata[index].Predicted[selecteddatatype].NewCount.HasActual" class="datapoint-secondaryData">Actual: {{ fulldata[index].Predicted[selecteddatatype].NewCount.Actual }}</div>
     </div>
     `,

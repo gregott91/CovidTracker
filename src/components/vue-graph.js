@@ -29,7 +29,7 @@ export function initializeGraphComponent() {
       },
     },
     template: `
-    <div>
+    <div class="graph-canvas-container">
         <canvas :id="id" class="graph-canvas"></canvas>
     </div>
     `,

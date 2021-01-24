@@ -81,3 +81,10 @@ div.datapoint-header {
 div.datapoint-secondaryData {
     margin-left: 2em;
 }
+
+div.graph-canvas-container {
+    height: 10rem;
+    width: 100rem;
+    position: relative;
+    margin: 0 auto;
+}
