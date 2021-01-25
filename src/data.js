@@ -23,8 +23,15 @@ export function transformData(covidData) {
   const output = {
     DailyData: [],
     DataTypes: dataTypes,
+    FullDataTypes: {},
     RetrievalTimeDisplay: formatDateTimeForDisplay(new Date(covidData['RetrievalTime'])),
   };
+
+  covidData.DataTypes.forEach((x) => {
+    output.FullDataTypes[x.Name] = {
+      IsPositive: x.IsPositive,
+    };
+  });
 
   let transformedData = getMetadata(dailyData);
   transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction(dailyData));
@@ -86,7 +93,9 @@ function defaultTransformData(dataArray, dataType, countType, index) {
   data.HasPrevious = !(previousIndex >= dataArray.length);
   if (data.HasPrevious) {
     const previousDataPoint = dataArray[previousIndex][dataType][countType];
-    data.PercentChange = formatPercent((dataPoint - previousDataPoint) / previousDataPoint);
+    const percent = (dataPoint - previousDataPoint) / previousDataPoint;
+    data.PercentChange = formatPercent(percent);
+    data.RawPercentChange = percent;
     data.PreviousValue = formatWithCommas(previousDataPoint);
   }
 

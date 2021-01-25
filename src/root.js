@@ -18,6 +18,7 @@ function defineApp(covidData, observable) {
     retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: covidData.DataTypes,
     selecteddatatype: covidData.DataTypes[0],
+    datatypepositivity: covidData.FullDataTypes[covidData.DataTypes[0]].IsPositive,
     fulldata: covidData['DailyData'],
   };
 
@@ -48,6 +49,7 @@ function subscribeToEvents(observable, vueData, covidData) {
   });
 
   observable.subscribe(EVENT_TYPE.DATATYPE_CHANGED, (datatype) => {
+    vueData.datatypepositivity = covidData.FullDataTypes[datatype].IsPositive;
     setValue(vueData, 'selecteddatatype', datatype);
   });
 }

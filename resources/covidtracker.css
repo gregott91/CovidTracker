@@ -111,3 +111,7 @@ i.datepicker-button-icon {
 .container-fluid {
     margin-top: 2rem;
 }
+
+span.datapoint-text {
+    font-weight: bold;
+}
