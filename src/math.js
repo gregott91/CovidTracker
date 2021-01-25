@@ -1,3 +1,12 @@
+export function roundToNearestHighDigit(toRound, divisor) {
+  const value = Math.round(toRound / divisor);
+  const valueString = value.toString();
+  const firstDigit = valueString[0];
+  const padded = firstDigit.padEnd(valueString.length, '0');
+
+  return parseInt(padded);
+}
+
 export function getRollingAverage(rollAmount, data) {
   return data.map((_, index) => {
     return rollDataPoint(index, data, rollAmount);

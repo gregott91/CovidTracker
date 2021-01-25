@@ -1,11 +1,30 @@
 import {formatDateForDisplay, areUtcDatesEqual, formatDateTimeForDisplay} from './date-helpers';
 import {formatWithCommas, formatPercent, roundNumber} from './number-helpers';
-import {getRollingAverage, getGroupedDataAverage} from './math';
+import {getRollingAverage, getGroupedDataAverage, roundToNearestHighDigit} from './math';
 
 const rollAmount = 7;
 
 export function getDaysToSignificantValues(index, dataType, covidData) {
-  return ['93 days to 7asd'];
+  const divisor = 10;
+  const topValue = covidData[0].Raw[dataType].TotalCount.RawValue;
+  const significantValue = roundToNearestHighDigit(topValue, divisor);
+
+  const daysTo = [];
+
+  let dayCount = 0;
+  let lastValue = significantValue;
+  for (let i = covidData.length - 1; i >= index; i--) {
+    dayCount++;
+
+    if (covidData[i].Raw[dataType].TotalCount.RawValue > lastValue) {
+      daysTo.push(`${dayCount} day(s) to ${formatWithCommas(lastValue)}`);
+
+      dayCount = 0;
+      lastValue += significantValue;
+    }
+  }
+
+  return daysTo;
 }
 
 export function getIndexForDate(date, covidData) {
@@ -20,7 +39,7 @@ export function getIndexForDate(date, covidData) {
 }
 
 export function transformData(covidData) {
-  const dailyData = covidData['DailyData'];
+  const dailyData = limitDailyData(covidData['DailyData'], new Date(2020, 2, 0));
   const dataTypes = covidData.DataTypes.map((x) => x.Name);
   const countTypes = ['NewCount', 'TotalCount'];
 
@@ -45,6 +64,17 @@ export function transformData(covidData) {
   output.DailyData = transformedData;
 
   return output;
+}
+
+function limitDailyData(covidData, firstDay) {
+  const dailyData = [];
+  covidData.forEach((x) => {
+    if (new Date(x.Date) >= firstDay) {
+      dailyData.push(x);
+    }
+  });
+
+  return dailyData;
 }
 
 function getTransformPredictionFunction(dataTypes, countTypes, dailyData) {

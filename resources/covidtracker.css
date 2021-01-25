@@ -115,3 +115,7 @@ i.datepicker-button-icon {
 span.datapoint-text {
     font-weight: bold;
 }
+
+.footer {
+    background: white;
+}

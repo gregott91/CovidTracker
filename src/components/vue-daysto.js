@@ -19,6 +19,17 @@ export function initializeDaysToComponent() {
 `,
     watch: {
       index: function(val) {
+        this.getDaysTo();
+      },
+      selecteddatatype: function(val) {
+        this.getDaysTo();
+      },
+    },
+    mounted: function() {
+      this.getDaysTo();
+    },
+    methods: {
+      getDaysTo: function() {
         this.daysto = getDaysToSignificantValues(this.index, this.selecteddatatype, this.fulldata);
       },
     },
