@@ -19,7 +19,7 @@ function defineApp(covidData, observable) {
     datatypes: covidData.DataTypes,
     selecteddatatype: covidData.DataTypes[0],
     datatypepositivity: covidData.FullDataTypes[covidData.DataTypes[0]].IsPositive,
-    fulldata: covidData['DailyData'],
+    fulldata: covidData.DailyData,
   };
 
   new Vue({

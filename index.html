@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101298105);</script>
+    <script async src="//static.getclicky.com/js"></script>
     <title>Covid Data Dashboard</title>
   </head>
   <body>
@@ -38,6 +40,13 @@
               v-bind:key="selecteddatatype"
               v-bind:datatypepositivity="datatypepositivity"
             ></vue-datapoint>
+          </div>
+          <div class="col">
+            <vue-daysto
+              v-bind:index="index"
+              v-bind:selecteddatatype="selecteddatatype"  
+              v-bind:fulldata="fulldata"
+            ></vue-datepicker>
           </div>
         </div>
         <div class="row">

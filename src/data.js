@@ -4,6 +4,10 @@ import {getRollingAverage, getGroupedDataAverage} from './math';
 
 const rollAmount = 7;
 
+export function getDaysToSignificantValues(index, dataType, covidData) {
+  return ['93 days to 7asd'];
+}
+
 export function getIndexForDate(date, covidData) {
   for (let i = 0; i < covidData.DailyData.length; i++) {
     const thisDate = covidData.DailyData[i].Date;

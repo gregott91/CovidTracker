@@ -3,6 +3,7 @@ import {initializeDatePickerComponent} from './vue-datepicker';
 import {initializeDataTypesComponent} from './vue-datatypes';
 import {initializeGraphComponent} from './vue-graph';
 import {initializeFooterComponent} from './vue-footer';
+import {initializeDaysToComponent} from './vue-daysto';
 
 export function initializeComponents(observable) {
   initializeDatapointComponent();
@@ -10,4 +11,5 @@ export function initializeComponents(observable) {
   initializeDataTypesComponent(observable);
   initializeFooterComponent();
   initializeGraphComponent();
+  initializeDaysToComponent();
 }
