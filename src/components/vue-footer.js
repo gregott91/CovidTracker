@@ -5,7 +5,11 @@ export function initializeFooterComponent() {
     props: ['retrievaltime'],
     template: `
 <div class="footer">
-  <footer class="page-footer grey darken-1">Data last retrieved on: {{ retrievaltime }}</footer>
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Data last retrieved on: {{ retrievaltime }}</span>
+    </div>
+  </footer>
 </div>
     `,
   });

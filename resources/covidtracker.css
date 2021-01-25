@@ -39,8 +39,12 @@ div.footer {
 
 div.tab-inner {
     cursor: pointer;
-    padding: 0.5rem 2rem;
-    width: 100%;
+    padding: 1rem 3rem;
+}
+
+div.selected-tab {
+    background-color: #e3624b;
+    color: white;
 }
 
 div.unselected-tab:hover {
@@ -66,6 +70,10 @@ input.date-picker-input {
     font-size: 2rem;
     user-select: none;
     cursor: pointer;
+    height: 3.3rem;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 div.datapoint-container {
@@ -94,4 +102,12 @@ ul.sidenav-relative {
 
 .page-footer {
     padding-top: 0px;
+}
+
+i.datepicker-button-icon {
+    vertical-align: bottom;
+}
+
+.container-fluid {
+    margin-top: 2rem;
 }
