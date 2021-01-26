@@ -7,7 +7,17 @@ export function initializeFooterComponent() {
 <div class="footer">
   <footer class="footer">
     <div class="container">
-      <span class="text-muted">Data last retrieved on: {{ retrievaltime }}</span>
+      <div class="row">
+        <div class="col-sm-4">
+          <a class="text-muted footer-text" href="https://github.com/gregott91/CovidTracker">See the source on GitHub</a>
+        </div>
+        <div class="col-sm-4">
+          <span class="text-muted footer-text">Built using data from The COVID Tracking Project</span>
+        </div>
+        <div class="col-sm-4">
+          <span class="text-muted footer-text">Data last refreshed on: {{ retrievaltime }}</span>
+        </div>
+      </div>
     </div>
   </footer>
 </div>

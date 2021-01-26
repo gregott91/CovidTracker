@@ -125,3 +125,7 @@ span.datapoint-text {
 .navbar-collapse.collapse, .navbar-collapse.collapsing {
     margin-top: 1rem;
 }
+
+.footer-text {
+    font-size: 1.2rem;
+}
