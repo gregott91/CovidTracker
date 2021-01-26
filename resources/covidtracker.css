@@ -19,7 +19,6 @@ div.tab-bar {
 
 div.main-content {
     display: flex;
-    height: 100vh;
 }
 
 div.content-container {
@@ -90,7 +89,7 @@ div.graph-card {
 
 div.graph-canvas-container {
     position: relative;
-    height: 30rem;
+    height: 45rem;
     min-width: 70rem; 
 }
 
