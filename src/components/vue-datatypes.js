@@ -5,12 +5,16 @@ export function initializeDataTypesComponent(observable) {
   Vue.component('vue-datatypes', {
     props: ['datatypes', 'selecteddatatype'],
     template: `
-<div class="tab-bar">
-  <div v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
-      <div class="tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
-      <div class="tab-inner unselected-tab" v-else>{{ datatype }}</div>
+<nav class="d-none d-md-block sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item" v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
+        <div class="tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
+        <div class="tab-inner unselected-tab" v-else>{{ datatype }}</div>
+      </li>
+    </ul>
   </div>
-</div>
+</nav>
 `,
     methods: {
       dataTypeClicked: function(event) {

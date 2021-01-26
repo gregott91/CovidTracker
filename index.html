@@ -23,7 +23,7 @@
       ></vue-datatypes>
       <div class="container-fluid">
         <div class="row">
-          <div class="col">
+          <div class="col-sm-12">
             <vue-datepicker
               id="datepicker"
               v-bind:index="index"
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col-sm-6">
             <vue-datapoint
               v-bind:index="index"
               v-bind:selecteddatatype="selecteddatatype"  
@@ -41,7 +41,7 @@
               v-bind:datatypepositivity="datatypepositivity"
             ></vue-datapoint>
           </div>
-          <div class="col">
+          <div class="col-sm-6">
             <vue-daysto
               v-bind:index="index"
               v-bind:selecteddatatype="selecteddatatype"  
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col-sm-12">
             <vue-graph 
               id="count-graph"
               v-bind:selecteddatatype="selecteddatatype"  

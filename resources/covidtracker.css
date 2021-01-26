@@ -15,6 +15,7 @@ i.date-icon {
 
 div.tab-bar {
     border-right: 0.1rem solid rgba(0,0,0,0.14);
+    height: 100vh;
 }
 
 div.main-content {
@@ -113,6 +114,7 @@ i.datepicker-button-icon {
 
 .container-fluid {
     margin-top: 2rem;
+    margin-bottom: 3rem;
 }
 
 span.datapoint-text {
@@ -121,4 +123,9 @@ span.datapoint-text {
 
 .footer {
     background: lightgray;
+}
+
+nav {
+    border-right: 0.1rem solid rgba(0,0,0,0.14);
+    height: 100vh;
 }
