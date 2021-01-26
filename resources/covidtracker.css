@@ -122,7 +122,7 @@ span.datapoint-text {
     background: lightgray;
 }
 
-.navbar-collapse.collapse, .navbar-collapse.collapsing {
+.navbar-collapse.collapse.show, .navbar-collapse.collapsing {
     margin-top: 1rem;
 }
 
