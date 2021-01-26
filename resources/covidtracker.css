@@ -85,9 +85,8 @@ div.datapoint-secondaryData {
 }
 
 div.graph-canvas-container {
-    height: 10rem;
-    width: 100rem;
     position: relative;
+    height: 30rem;
 }
 
 ul.sidenav-relative {
@@ -117,5 +116,5 @@ span.datapoint-text {
 }
 
 .footer {
-    background: white;
+    background: lightgray;
 }

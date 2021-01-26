@@ -29,8 +29,12 @@ export function initializeGraphComponent() {
       },
     },
     template: `
-<div class="graph-canvas-container">
-    <canvas :id="id" class="graph-canvas"></canvas>
+<div class="card datapoint-container">
+  <div class="card-body">
+    <div class="graph-canvas-container">
+      <canvas :id="id" class="graph-canvas"></canvas>
+    </div>
+  </div>
 </div>
     `,
     watch: {

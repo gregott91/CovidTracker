@@ -20,14 +20,15 @@ export function createGraph(sourceElement) {
           pointRadius: 0,
           fill: false,
         }],
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            },
-          }],
-        },
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          },
+        }],
       },
     },
   });
