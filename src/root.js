@@ -1,13 +1,10 @@
 import Vue from 'vue';
-import {Observable} from './observable';
 import {initializeComponents} from './components/components';
 import {ARROW_ACTION, EVENT_TYPE} from './constants';
 import {getIndexForDate} from './data';
 import {setValue} from './vue-helpers';
 
-export function startApp(covidData) {
-  const observable = new Observable();
-
+export function startApp(covidData, observable) {
   initializeComponents(observable);
   defineApp(covidData, observable);
 }
