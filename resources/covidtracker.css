@@ -84,9 +84,14 @@ div.datapoint-secondaryData {
     margin-left: 2em;
 }
 
+div.graph-card {
+    overflow-y: auto;
+}
+
 div.graph-canvas-container {
     position: relative;
     height: 30rem;
+    min-width: 70rem; 
 }
 
 ul.sidenav-relative {
