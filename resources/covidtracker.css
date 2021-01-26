@@ -20,6 +20,8 @@ div.tab-bar {
 
 div.main-content {
     display: flex;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 }
 
 div.content-container {
@@ -112,11 +114,6 @@ i.datepicker-button-icon {
     vertical-align: bottom;
 }
 
-.container-fluid {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-}
-
 span.datapoint-text {
     font-weight: bold;
 }
@@ -125,7 +122,6 @@ span.datapoint-text {
     background: lightgray;
 }
 
-nav {
-    border-right: 0.1rem solid rgba(0,0,0,0.14);
-    height: 100vh;
+.navbar-collapse.collapse, .navbar-collapse.collapsing {
+    margin-top: 1rem;
 }
