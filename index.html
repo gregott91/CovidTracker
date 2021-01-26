@@ -17,49 +17,49 @@
   <body>
     <div id="app">
       <div class="main-content">
-      <vue-datatypes
-        v-bind:selecteddatatype="selecteddatatype"
-        v-bind:datatypes="datatypes"
-      ></vue-datatypes>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <vue-datepicker
-              id="datepicker"
-              v-bind:index="index"
-              v-bind:fulldata="fulldata"
-            ></vue-datepicker>
+        <vue-datatypes
+          v-bind:selecteddatatype="selecteddatatype"
+          v-bind:datatypes="datatypes"
+        ></vue-datatypes>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <vue-datepicker
+                id="datepicker"
+                v-bind:index="index"
+                v-bind:fulldata="fulldata"
+              ></vue-datepicker>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <vue-datapoint
-              v-bind:index="index"
-              v-bind:selecteddatatype="selecteddatatype"  
-              v-bind:fulldata="fulldata"
-              v-bind:key="selecteddatatype"
-              v-bind:datatypepositivity="datatypepositivity"
-            ></vue-datapoint>
+          <div class="row">
+            <div class="col-sm-6">
+              <vue-datapoint
+                v-bind:index="index"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+                v-bind:key="selecteddatatype"
+                v-bind:datatypepositivity="datatypepositivity"
+              ></vue-datapoint>
+            </div>
+            <div class="col-sm-6">
+              <vue-daysto
+                v-bind:index="index"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+              ></vue-datepicker>
+            </div>
           </div>
-          <div class="col-sm-6">
-            <vue-daysto
-              v-bind:index="index"
-              v-bind:selecteddatatype="selecteddatatype"  
-              v-bind:fulldata="fulldata"
-            ></vue-datepicker>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <vue-graph 
-              id="count-graph"
-              v-bind:selecteddatatype="selecteddatatype"  
-              v-bind:fulldata="fulldata"
-            ></vue-graph>
+          <div class="row">
+            <div class="col-sm-12">
+              <vue-graph 
+                id="count-graph"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+              ></vue-graph>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <vue-footer
           v-bind:retrievaltime="retrievaltime"
       ></vue-footer>
