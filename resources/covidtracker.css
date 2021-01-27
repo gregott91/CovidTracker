@@ -18,11 +18,6 @@ div.tab-bar {
     height: 100vh;
 }
 
-div.main-content {
-    display: flex;
-    margin-top: 2rem;
-}
-
 div.content-container {
     margin-left: 2rem;
     margin-top: 2rem;
@@ -125,4 +120,8 @@ footer {
 
 .footer-text {
     font-size: 1.2rem;
+}
+
+main {
+    margin-top: 2rem;
 }
