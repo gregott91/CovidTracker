@@ -18,11 +18,9 @@ export function initializeDatePickerComponent(observable) {
     },
     template: `
 <div class="date-picker-container">
-  <div class="date-picker">
-    <button type="button" class="btn btn-outline-danger" v-on:click="goBack"><i class="material-icons datepicker-button-icon">keyboard_arrow_left</i></button>
-    <input :id="id" class="date-picker-input" onkeypress="return false;"/>
-    <button type="button" class="btn btn-outline-danger" v-on:click="goForward"><i class="material-icons datepicker-button-icon">keyboard_arrow_right</i></button>
-  </div>
+  <button type="button" class="btn btn-outline-danger" v-on:click="goBack"><i class="material-icons datepicker-button-icon">keyboard_arrow_left</i></button>
+  <input :id="id" class="date-picker-input" onkeypress="return false;"/>
+  <button type="button" class="btn btn-outline-danger" v-on:click="goForward"><i class="material-icons datepicker-button-icon">keyboard_arrow_right</i></button>
 </div>
 `,
     watch: {

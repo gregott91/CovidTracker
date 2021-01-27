@@ -21,7 +21,6 @@ div.tab-bar {
 div.main-content {
     display: flex;
     margin-top: 2rem;
-    margin-bottom: 8rem;
 }
 
 div.content-container {
@@ -56,11 +55,9 @@ div.unselected-tab:hover {
 
 div.date-picker-container {
     margin-bottom: 0.5rem;
-}
-
-div.date-picker {
     text-align: center;
     user-select: none;
+    white-space: nowrap;
 }
 
 input.date-picker-input {
@@ -118,7 +115,7 @@ span.datapoint-text {
     font-weight: bold;
 }
 
-.footer {
+footer {
     background: lightgray;
 }
 

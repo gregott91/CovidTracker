@@ -14,57 +14,61 @@
   <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101298105);</script>
   <script async src="//static.getclicky.com/js"></script>
 </head>
-<body>
-<div id="app">
-  <vue-datatypes
-    v-bind:selecteddatatype="selecteddatatype"
-    v-bind:datatypes="datatypes"
-  ></vue-datatypes>
-  <div class="main-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">
-          <vue-datepicker
-            id="datepicker"
-            v-bind:index="index"
-            v-bind:fulldata="fulldata"
-          ></vue-datepicker>
+<body class="d-flex flex-column h-100">
+  <div id="app">
+    <header>
+      <vue-datatypes
+        v-bind:selecteddatatype="selecteddatatype"
+        v-bind:datatypes="datatypes"
+      ></vue-datatypes>
+    </header>
+    <main class="flex-shrink-0">
+      <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <vue-datepicker
+                id="datepicker"
+                v-bind:index="index"
+                v-bind:fulldata="fulldata"
+              ></vue-datepicker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <vue-datapoint
+                v-bind:index="index"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+                v-bind:key="selecteddatatype"
+                v-bind:datatypepositivity="datatypepositivity"
+              ></vue-datapoint>
+            </div>
+            <div class="col-sm-6">
+              <vue-daysto
+                v-bind:index="index"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+              ></vue-datepicker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <vue-graph 
+                id="count-graph"
+                v-bind:selecteddatatype="selecteddatatype"  
+                v-bind:fulldata="fulldata"
+              ></vue-graph>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <vue-datapoint
-            v-bind:index="index"
-            v-bind:selecteddatatype="selecteddatatype"  
-            v-bind:fulldata="fulldata"
-            v-bind:key="selecteddatatype"
-            v-bind:datatypepositivity="datatypepositivity"
-          ></vue-datapoint>
-        </div>
-        <div class="col-sm-6">
-          <vue-daysto
-            v-bind:index="index"
-            v-bind:selecteddatatype="selecteddatatype"  
-            v-bind:fulldata="fulldata"
-          ></vue-datepicker>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <vue-graph 
-            id="count-graph"
-            v-bind:selecteddatatype="selecteddatatype"  
-            v-bind:fulldata="fulldata"
-          ></vue-graph>
-        </div>
-      </div>
-    </div>
+    </main>
+    <vue-footer
+      v-bind:retrievaltime="retrievaltime"
+    ></vue-footer>
   </div>
-  <vue-footer
-    v-bind:retrievaltime="retrievaltime"
-  ></vue-footer>
-</div>
-<script src="./dist/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="./dist/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
