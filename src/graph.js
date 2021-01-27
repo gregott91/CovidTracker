@@ -42,3 +42,29 @@ export function setGraphData(chart, dataSet, dataSetType) {
   chart.data.datasets[1].data = dataSet.RollingValues;
   chart.update();
 }
+
+export function openTooltip(chart, pointIndex) {
+  if (chart.tooltip._active == undefined) {
+    chart.tooltip._active = [];
+  }
+
+  const activeElements = chart.tooltip._active;
+  const requestedElem = chart.getDatasetMeta(0).data[pointIndex];
+
+  for (let i = 0; i < activeElements.length; i++) {
+    if (requestedElem._index == activeElements[i]._index) {
+      return;
+    }
+  }
+
+  activeElements.push(requestedElem);
+  chart.tooltip._active = activeElements;
+  chart.tooltip.update(true);
+  chart.draw();
+}
+
+export function closeTooltip(chart) {
+  chart.tooltip._active = [];
+  chart.tooltip.update(true);
+  chart.draw();
+}

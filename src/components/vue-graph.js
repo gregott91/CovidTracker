@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import {createGraph, setGraphData} from '../graph';
+import {createGraph, setGraphData, openTooltip, closeTooltip} from '../graph';
 
 export function initializeGraphComponent() {
   Vue.component('vue-graph', {
-    props: ['id', 'fulldata', 'selecteddatatype'],
+    props: ['id', 'index', 'fulldata', 'selecteddatatype'],
     mounted: function() {
       this.buildGraph();
     },
@@ -14,7 +14,7 @@ export function initializeGraphComponent() {
       },
       refreshData: function() {
         const data = [];
-        for (let i = this.fulldata.length -1; i >= 0; i--) {
+        for (let i = this.fulldata.length - 1; i >= 0; i--) {
           data.push(this.fulldata[i]);
         }
 
@@ -27,6 +27,10 @@ export function initializeGraphComponent() {
 
         setGraphData(this.graph, dataSet, dataType);
       },
+      openChartTooltip() {
+        closeTooltip(this.graph);
+        openTooltip(this.graph, this.fulldata.length - this.index - 1);
+      },
     },
     template: `
 <div class="card datapoint-container graph-card">
@@ -38,6 +42,9 @@ export function initializeGraphComponent() {
     watch: {
       selecteddatatype: function(val) {
         this.refreshData();
+      },
+      index: function(val) {
+        this.openChartTooltip();
       },
     },
   });
