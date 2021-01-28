@@ -19,6 +19,7 @@ export function createGraph(sourceElement) {
           order: 0,
           pointRadius: 0,
           fill: false,
+          pointHitRadius: 2,
         }],
     },
     options: {
