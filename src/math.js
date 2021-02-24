@@ -15,29 +15,10 @@ export function getRollingAverage(rollAmount, data) {
 
 function rollDataPoint(index, dataArray, rollAmount) {
   const dataToRoll = [];
-  const traverseAmount = Math.floor(rollAmount / 2);
-  let startIndex = index - traverseAmount;
-  let endIndex = index + traverseAmount;
+  const startIndex = index;
+  const endIndex = Math.min(dataArray.length - 1, index + rollAmount);
 
-  if (startIndex < 0) {
-    endIndex = endIndex - startIndex;
-    startIndex = 0;
-  }
-
-  if (endIndex >= dataArray.length) {
-    startIndex = startIndex - (endIndex - dataArray.length);
-    endIndex = dataArray.length-1;
-  }
-
-  for (let i = startIndex; i <= endIndex; i++) {
-    if (i < 0) {
-      continue;
-    }
-
-    if (i > dataArray.length) {
-      break;
-    }
-
+  for (let i = startIndex; i < endIndex; i++) {
     dataToRoll.push(dataArray[i]);
   }
 
