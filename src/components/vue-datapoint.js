@@ -2,11 +2,11 @@ import Vue from 'vue';
 
 export function initializeDatapointComponent() {
   Vue.component('vue-datapoint', {
-    props: ['index', 'fulldata', 'selecteddatatype', 'datatypepositivity', 'datatypecumulative'],
+    props: ['index', 'fulldata', 'selecteddatatype', 'datatypepositivity', 'datatypecumulative', 'fulldatatypes'],
     template: `
 <div class="card datapoint-container">
   <div class="card-body">
-    <h3 class="card-title">{{ selecteddatatype }} for {{ fulldata[index].DisplayDate }}</h3>
+    <h3 class="card-title">{{ fulldatatypes.filter(x => x.Name == selecteddatatype)[0].Display }} for {{ fulldata[index].DisplayDate }}</h3>
     <div v-if="datatypecumulative" class="datapoint-primarydata">Total: {{ fulldata[index].Raw[selecteddatatype].TotalCount.Value }}</div>
     <div class="datapoint-primarydata">New: {{ fulldata[index].Raw[selecteddatatype].NewCount.Value }}</div>
     <div class="datapoint-secondaryData">

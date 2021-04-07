@@ -3,7 +3,7 @@ import {EVENT_TYPE} from '../constants';
 
 export function initializeDataTypesComponent(observable) {
   Vue.component('vue-datatypes', {
-    props: ['datatypes', 'selecteddatatype', 'fulldatatypes'],
+    props: ['selecteddatatype', 'fulldatatypes'],
     template: `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
