@@ -20,6 +20,7 @@
       <vue-datatypes
         v-bind:selecteddatatype="selecteddatatype"
         v-bind:datatypes="datatypes"
+        v-bind:fulldatatypes="fulldatatypes"
       ></vue-datatypes>
     </header>
     <main class="flex-shrink-0">
@@ -41,10 +42,11 @@
               v-bind:fulldata="fulldata"
               v-bind:key="selecteddatatype"
               v-bind:datatypepositivity="datatypepositivity"
+              v-bind:datatypecumulative="datatypecumulative"
             ></vue-datapoint>
           </div>
           <div class="col-sm-6">
-            <vue-daysto
+            <vue-daysto v-if="datatypecumulative"
               v-bind:index="index"
               v-bind:selecteddatatype="selecteddatatype"  
               v-bind:fulldata="fulldata"

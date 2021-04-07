@@ -14,5 +14,5 @@ export function formatPercent(number) {
 }
 
 export function roundNumber(number, rounding) {
-  return +parseFloat(number).toFixed(rounding);
+  return parseFloat(number).toFixed(rounding);
 }

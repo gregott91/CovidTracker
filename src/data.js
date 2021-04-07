@@ -46,20 +46,23 @@ export function transformData(covidData) {
   const output = {
     DailyData: [],
     DataTypes: dataTypes,
-    FullDataTypes: {},
+    FullDataTypes: covidData.DataTypes,
+    DataTypeRenderInfo: {},
     RetrievalTimeDisplay: formatDateTimeForDisplay(new Date(covidData['RetrievalTime'])),
   };
 
   covidData.DataTypes.forEach((x) => {
-    output.FullDataTypes[x.Name] = {
+    output.DataTypeRenderInfo[x.Name] = {
       IsPositive: x.IsPositive,
+      IsCumulative: x.IsCumulative,
+      ShowDecimals: x.ShowDecimals,
     };
   });
 
   let transformedData = getMetadata(dailyData);
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Raw', getTransformRawPointFunction(dailyData));
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Rolling', getTransformRollingFunction(dataTypes, countTypes, dailyData));
-  transformedData = transformAndMergeData(dailyData, transformedData, dataTypes, countTypes, 'Predicted', getTransformPredictionFunction(dataTypes, countTypes, dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, covidData.DataTypes, countTypes, 'Raw', getTransformRawPointFunction(dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, covidData.DataTypes, countTypes, 'Rolling', getTransformRollingFunction(covidData.DataTypes, countTypes, dailyData));
+  transformedData = transformAndMergeData(dailyData, transformedData, covidData.DataTypes, countTypes, 'Predicted', getTransformPredictionFunction(covidData.DataTypes, countTypes, dailyData));
 
   output.DailyData = transformedData;
 
@@ -84,16 +87,16 @@ function getTransformPredictionFunction(dataTypes, countTypes, dailyData) {
     const tomorrowIndex = index - 1;
     const tomorrowGroupIndex = (daysInWeek + tomorrowIndex) % daysInWeek;
     const todayGroupIndex = index % daysInWeek;
-    const tomorrowGroupedAverage = groupedAverages[dataType][countType][tomorrowGroupIndex];
-    const todayGroupedAverage = groupedAverages[dataType][countType][todayGroupIndex];
+    const tomorrowGroupedAverage = groupedAverages[dataType.Name][countType][tomorrowGroupIndex];
+    const todayGroupedAverage = groupedAverages[dataType.Name][countType][todayGroupIndex];
     const output = {
-      Value: formatWithCommas(tomorrowGroupedAverage * (data / todayGroupedAverage)),
+      Value: formatAsRoundedOrDecimal(tomorrowGroupedAverage * (data / todayGroupedAverage), dataType),
       HasActual: false,
     };
 
     if (tomorrowIndex >= 0) {
       output.HasActual = true;
-      output.Actual = formatWithCommas(dailyData[tomorrowIndex][dataType][countType]);
+      output.Actual = formatAsRoundedOrDecimal(dailyData[tomorrowIndex][dataType.Name][countType], dataType);
     }
 
     return output;
@@ -116,9 +119,10 @@ function getTransformRollingFunction(dataTypes, countTypes, dailyData) {
 
 function defaultTransformData(dataArray, dataType, countType, index) {
   const daysInWeek = 7;
-  const dataPoint = dataArray[index][dataType][countType];
+  const dataPoint = dataArray[index][dataType.Name][countType];
+
   const data = {
-    Value: formatWithCommas(dataPoint),
+    Value: formatAsRoundedOrDecimal(dataPoint, dataType),
     RawValue: roundNumber(dataPoint, 2),
   };
 
@@ -126,14 +130,22 @@ function defaultTransformData(dataArray, dataType, countType, index) {
 
   data.HasPrevious = !(previousIndex >= dataArray.length);
   if (data.HasPrevious) {
-    const previousDataPoint = dataArray[previousIndex][dataType][countType];
+    const previousDataPoint = dataArray[previousIndex][dataType.Name][countType];
     const percent = (dataPoint - previousDataPoint) / previousDataPoint;
     data.PercentChange = formatPercent(percent);
     data.RawPercentChange = percent;
-    data.PreviousValue = formatWithCommas(previousDataPoint);
+    data.PreviousValue = formatAsRoundedOrDecimal(previousDataPoint, dataType);
   }
 
   return data;
+}
+
+function formatAsRoundedOrDecimal(dataPoint, dataType) {
+  if (dataType.ShowDecimals) {
+    return roundNumber(dataPoint, 2);
+  } else {
+    return formatWithCommas(dataPoint);
+  }
 }
 
 function transformAndMergeData(
@@ -150,11 +162,11 @@ function transformAndMergeData(
     const transformedDataPoint = {};
 
     dataTypes.forEach((dataType) => {
-      transformedDataPoint[dataType] = {};
+      transformedDataPoint[dataType.Name] = {};
 
       countTypes.forEach((countType) => {
-        const newData = transformFunc(index, dataPoint[dataType][countType], dataType, countType);
-        transformedDataPoint[dataType][countType] = newData;
+        const newData = transformFunc(index, dataPoint[dataType.Name][countType], dataType, countType);
+        transformedDataPoint[dataType.Name][countType] = newData;
       });
     });
 
@@ -192,16 +204,16 @@ function calculateRollingAverages(dataTypes, countTypes, data) {
 
   dataTypes.forEach((dataType) => {
     countTypes.forEach((countType) => {
-      const roll = getRollingAverage(rollAmount, data.map((x) => x[dataType][countType]));
+      const roll = getRollingAverage(rollAmount, data.map((x) => x[dataType.Name][countType]));
 
       rollingAverages = rollingAverages.map((dataPoint, index) => {
         const rollPoint = roll[index];
 
-        if (!dataPoint[dataType]) {
-          dataPoint[dataType] = {};
+        if (!dataPoint[dataType.Name]) {
+          dataPoint[dataType.Name] = {};
         }
 
-        dataPoint[dataType][countType] = rollPoint;
+        dataPoint[dataType.Name][countType] = rollPoint;
 
         return dataPoint;
       });
@@ -216,10 +228,10 @@ function calculateGroupedDataAverages(dataTypes, countTypes, data) {
   const predictions = {};
   const daysInWeek = 7;
   dataTypes.forEach((dataType) => {
-    predictions[dataType] = {};
+    predictions[dataType.Name] = {};
     countTypes.forEach((countType) => {
-      const groupedAverages = getGroupedDataAverage(daysInWeek, data.map((x) => x[dataType][countType]));
-      predictions[dataType][countType] = groupedAverages;
+      const groupedAverages = getGroupedDataAverage(daysInWeek, data.map((x) => x[dataType.Name][countType]));
+      predictions[dataType.Name][countType] = groupedAverages;
     });
   });
 

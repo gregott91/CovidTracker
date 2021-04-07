@@ -14,8 +14,10 @@ function defineApp(covidData, observable) {
     index: 0,
     retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: covidData.DataTypes,
+    fulldatatypes: covidData.FullDataTypes,
     selecteddatatype: covidData.DataTypes[0],
-    datatypepositivity: covidData.FullDataTypes[covidData.DataTypes[0]].IsPositive,
+    datatypepositivity: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsPositive,
+    datatypecumulative: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsCumulative,
     fulldata: covidData.DailyData,
   };
 
@@ -46,7 +48,8 @@ function subscribeToEvents(observable, vueData, covidData) {
   });
 
   observable.subscribe(EVENT_TYPE.DATATYPE_CHANGED, (datatype) => {
-    vueData.datatypepositivity = covidData.FullDataTypes[datatype].IsPositive;
+    vueData.datatypepositivity = covidData.DataTypeRenderInfo[datatype].IsPositive;
+    vueData.datatypecumulative = covidData.DataTypeRenderInfo[datatype].IsCumulative;
     setValue(vueData, 'selecteddatatype', datatype);
   });
 }

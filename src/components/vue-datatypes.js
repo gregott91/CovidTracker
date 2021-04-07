@@ -3,7 +3,7 @@ import {EVENT_TYPE} from '../constants';
 
 export function initializeDataTypesComponent(observable) {
   Vue.component('vue-datatypes', {
-    props: ['datatypes', 'selecteddatatype'],
+    props: ['datatypes', 'selecteddatatype', 'fulldatatypes'],
     template: `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -12,9 +12,9 @@ export function initializeDataTypesComponent(observable) {
     </button>
     <div class="collapse navbar-collapse" id="top-navbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" v-for="datatype in datatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype">
-          <div class="tab-inner selected-tab" v-if="datatype == selecteddatatype">{{ datatype }}</div>
-          <div class="tab-inner unselected-tab" v-else>{{ datatype }}</div>
+        <li class="nav-item" v-for="datatype in fulldatatypes" v-on:click="dataTypeClicked" v-bind:datatype="datatype.Name">
+          <div class="tab-inner selected-tab" v-if="datatype.Name == selecteddatatype">{{ datatype.Display}}</div>
+          <div class="tab-inner unselected-tab" v-else>{{ datatype.Display }}</div>
         </li>
       </ul>
     </div>
