@@ -15,7 +15,7 @@ function defineApp(covidData, observable) {
     retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: covidData.DataTypes,
     fulldatatypes: covidData.FullDataTypes,
-    selecteddatatype: covidData.DataTypes[0],
+    selecteddatatype: covidData.FullDataTypes,
     datatypepositivity: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsPositive,
     datatypecumulative: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsCumulative,
     fulldata: covidData.DailyData,
