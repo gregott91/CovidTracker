@@ -8,3 +8,8 @@ export const ARROW_ACTION = {
   FORWARD: 'forward',
   BACKWARD: 'backward',
 };
+
+export const QUERY_PARAMETER = {
+  SELECTED_DATATYPE: 'datatype',
+  DATE: 'date',
+};

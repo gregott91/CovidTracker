@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import {initializeComponents} from './components/components';
-import {ARROW_ACTION, EVENT_TYPE} from './constants';
+import {ARROW_ACTION, EVENT_TYPE, QUERY_PARAMETER} from './constants';
 import {getIndexForDate} from './data';
 import {setValue} from './vue-helpers';
+import {setQueryParameter} from './query';
 
 export function startApp(covidData, observable) {
   initializeComponents(observable);
@@ -15,7 +16,7 @@ function defineApp(covidData, observable) {
     retrievaltime: covidData.RetrievalTimeDisplay,
     datatypes: covidData.DataTypes,
     fulldatatypes: covidData.FullDataTypes,
-    selecteddatatype: covidData.FullDataTypes,
+    selecteddatatype: covidData.DataTypes[0],
     datatypepositivity: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsPositive,
     datatypecumulative: covidData.DataTypeRenderInfo[covidData.DataTypes[0]].IsCumulative,
     fulldata: covidData.DailyData,
@@ -51,11 +52,13 @@ function subscribeToEvents(observable, vueData, covidData) {
     vueData.datatypepositivity = covidData.DataTypeRenderInfo[datatype].IsPositive;
     vueData.datatypecumulative = covidData.DataTypeRenderInfo[datatype].IsCumulative;
     setValue(vueData, 'selecteddatatype', datatype);
+    setQueryParameter(QUERY_PARAMETER.SELECTED_DATATYPE, datatype);
   });
 }
 
 function setDataIndex(data, index) {
   if (index < data.fulldata.length && index >= 0) {
     setValue(data, 'index', index);
+    setQueryParameter(QUERY_PARAMETER.DATE, data.fulldata[index].Date);
   }
 }

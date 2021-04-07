@@ -18,7 +18,7 @@ export function initializeGraphComponent() {
           data.push(this.fulldata[i]);
         }
 
-        const dataType = this.selecteddatatype.Name;
+        const dataType = this.selecteddatatype;
         const dataSet = {
           Values: data.map((x) => x.Raw[dataType].NewCount.RawValue),
           RollingValues: data.map((x) => x.Rolling[dataType].NewCount.RawValue),

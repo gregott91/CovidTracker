@@ -30,7 +30,7 @@ export function initializeDaysToComponent() {
     },
     methods: {
       getDaysTo: function() {
-        this.daysto = getDaysToSignificantValues(this.index, this.selecteddatatype.Name, this.fulldata);
+        this.daysto = getDaysToSignificantValues(this.index, this.selecteddatatype, this.fulldata);
       },
     },
   });
